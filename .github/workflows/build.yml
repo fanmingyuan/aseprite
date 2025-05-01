@@ -1,5 +1,11 @@
-name: build
-on: [push, pull_request]
+name: Build Specific Version
+on: 
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Git ref (branch, tag, commit SHA)'
+        required: true
+        default: 'main'
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -69,5 +75,6 @@ jobs:
       with:
         name: aseprice-package
         path: |
-          aseprite-${{ github.run_id }}.zip
-          build/aseprite.sym  # 如果需要包含调试符号
+            libcrypto-1_1-x64.dll
+            build/bin/data
+            build/bin/aseprite.exe
